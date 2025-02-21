@@ -42,3 +42,8 @@ pin:
 stepper:
 #   the steppers that should cause the pin to switch.
 #   If this parameter is not specified, the module will listen to all steppers
+disengage_before_enable: False
+#   By default the brake will be disengaged after the drivers are turned on and
+#   engaged before they are turned off.
+#   Set this to true if that causes tmc errors for you to switch the order of
+#   operations.
