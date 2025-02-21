@@ -2,20 +2,15 @@ class StepperBrakeEnablePin:
     def __init__(self, enable, mcu_pin):
         self.enable = enable
         self.mcu_pin = mcu_pin
-        self.set_enable = self.enable.set_enable
-        self.set_disable = self.enable.set_disable
-        self.enable.set_enable = self._set_enable
-        self.enable.set_disable = self._set_disable
+        self.mcu_enable = self.enable.mcu_enable
+        self.enable.mcu_enable = self
 
-    def _set_enable(self, print_time):
-        if not self.enable.enable_count:
-            self.mcu_pin.set_digital(print_time, 1)
-        self.set_enable(print_time)
-
-    def _set_disable(self, print_time):
-        self.set_disable(print_time)
-        if not self.enable.enable_count:
-            self.mcu_pin.set_digital(print_time, 0)
+    def set_digital(self, print_time, value):
+        if not value:
+            self.mcu_pin.set_digital(print_time, value)
+        self.mcu_enable.set_digital(print_time, value)
+        if value:
+            self.mcu_pin.set_digital(print_time, value)
 
 
 class StepperBrake:
