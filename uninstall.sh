@@ -46,5 +46,11 @@ function uninstall_extension {
     done
 }
 
+function restart_klipper {
+    echo "[POST-UNINSTALL] Restarting Klipper..."
+    sudo systemctl restart klipper
+}
+
 preflight_checks
 uninstall_extension
+restart_klipper
