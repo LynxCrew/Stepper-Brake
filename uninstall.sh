@@ -2,7 +2,7 @@
 
 KLIPPER_PATH="${HOME}/klipper"
 REPO_PATH="${HOME}/stepper-brake"
-EXTENSIONS="stepper_brake"
+EXTENSIONS="stepper_psu"
 green=$(echo -en "\e[92m")
 red=$(echo -en "\e[91m")
 cyan=$(echo -en "\e[96m")
@@ -29,7 +29,7 @@ function preflight_checks {
 function uninstall_extension {
     local yn
     while true; do
-        read -p "${cyan}Do you really want to uninstall Stepper-Brake? (Y/n):${white} " yn
+        read -p "${cyan}Do you really want to uninstall Stepper-PSU? (Y/n):${white} " yn
         case "${yn}" in
           Y|y|Yes|yes)
             for extension in ${EXTENSIONS}; do

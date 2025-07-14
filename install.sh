@@ -2,7 +2,7 @@
 
 KLIPPER_PATH="${HOME}/klipper"
 REPO_PATH="${HOME}/stepper-brake"
-EXTENSIONS="stepper_brake"
+EXTENSIONS="stepper_psu"
 
 set -eu
 export LC_ALL=C
@@ -28,18 +28,18 @@ function check_download {
     stepperbrakebasename="$(basename ${REPO_PATH})"
 
     if [ ! -d "${REPO_PATH}" ]; then
-        echo "[DOWNLOAD] Downloading Stepper-Brake repository..."
+        echo "[DOWNLOAD] Downloading Stepper-PSU repository..."
         if git -b psu_enable -C $stepperbrakedirname clone https://github.com/LynxCrew/Stepper-Brake.git $stepperbrakebasename; then
             chmod +x ${REPO_PATH}/install.sh
             chmod +x ${REPO_PATH}/update.sh
             chmod +x ${REPO_PATH}/uninstall.sh
             printf "[DOWNLOAD] Download complete!\n\n"
         else
-            echo "[ERROR] Download of Stepper-Brake git repository failed!"
+            echo "[ERROR] Download of Stepper-PSU git repository failed!"
             exit -1
         fi
     else
-        printf "[DOWNLOAD] Stepper-Brake repository already found locally. Continuing...\n\n"
+        printf "[DOWNLOAD] Stepper-PSU repository already found locally. Continuing...\n\n"
     fi
 }
 
@@ -60,7 +60,7 @@ function restart_klipper {
 
 
 printf "\n======================================\n"
-echo "- Stepper-Brake install script -"
+echo "- Stepper-PSU install script -"
 printf "======================================\n\n"
 
 

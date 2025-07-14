@@ -36,14 +36,14 @@ should not need a brake, if you feel like you still need it, open an issue and
 I will try to implement it)
 just add
 ```
-[stepper_brake my_stepper_brake]
+[stepper_psu my_stepper_psu]
 pin: 
 #   the pin to be switched when steppers turn on or off
+wait_time: 0.0
+#   The Time to block after enabling steppers so the psu has time to fully turn on
 stepper:
 #   the steppers that should cause the pin to switch.
 #   If this parameter is not specified, the module will listen to all steppers
-disengage_before_enable: False
-#   By default the brake will be disengaged after the drivers are turned on and
-#   engaged before they are turned off.
-#   Set this to true if that causes tmc errors for you to switch the order of
-#   operations.
+```
+
+`DISABLE_STEPPER_PSU STEPPER_PSU=my_stepper_psu` will turn it off again

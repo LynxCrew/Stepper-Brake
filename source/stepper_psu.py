@@ -15,9 +15,11 @@ class StepperBrakeEnablePin:
         self.mcu_enable.set_digital(print_time, value)
 
 
-class StepperBrake:
+class StepperPSU:
     def __init__(self, config):
         self.config = config
+        self.full_name = config.get_name()
+        self.name = self.full_name.split()[-1]
         self.printer = config.get_printer()
         self.toolhead = self.printer.lookup_object("toolhead")
         ppins = self.printer.lookup_object("pins")
@@ -27,6 +29,15 @@ class StepperBrake:
         self.stepper_enable = self.printer.load_object(config, "stepper_enable")
         self.printer.register_event_handler("klippy:ready", self._handle_ready)
         self.printer.register_event_handler("klippy:connect", self._handle_connect)
+
+        gcode = self.printer.lookup_object("gcode")
+        gcode.register_mux_command(
+            "DISABLE_STEPPER_PSU",
+            "STEPPER_PSU",
+            self.name,
+            self.cmd_DISABLE_STEPPER_PSU,
+            desc=self.cmd_DISABLE_STEPPER_PSU_help,
+        )
 
     def _handle_connect(self):
         all_steppers = self.stepper_enable.get_steppers()
@@ -40,6 +51,10 @@ class StepperBrake:
                 self,
             )
 
+    def cmd_DISABLE_STEPPER_PSU(self, gcmd):
+        systime = self.printer.get_reactor().monotonic()
+        print_time = self.mcu.estimated_print_time(systime)
+        self.mcu_pin.set_digital(print_time, 0)
 
 def load_config_prefix(config):
-    return StepperBrake(config)
+    return StepperPSU(config)
