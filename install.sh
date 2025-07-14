@@ -29,7 +29,7 @@ function check_download {
 
     if [ ! -d "${REPO_PATH}" ]; then
         echo "[DOWNLOAD] Downloading Stepper-Brake repository..."
-        if git -C $stepperbrakedirname clone https://github.com/LynxCrew/Stepper-Brake.git $stepperbrakebasename; then
+        if git -b psu_enable -C $stepperbrakedirname clone https://github.com/LynxCrew/Stepper-Brake.git $stepperbrakebasename; then
             chmod +x ${REPO_PATH}/install.sh
             chmod +x ${REPO_PATH}/update.sh
             chmod +x ${REPO_PATH}/uninstall.sh

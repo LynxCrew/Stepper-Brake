@@ -13,7 +13,7 @@ order of operations still has to be discussed!
 SSH into you pi and run:
 ```
 cd ~
-wget -O - https://raw.githubusercontent.com/LynxCrew/Stepper-Brake/main/install.sh | bash
+wget -O - https://raw.githubusercontent.com/LynxCrew/Stepper-Brake/psu_enable/install.sh | bash
 ```
 
 then add this to your moonraker.conf:
