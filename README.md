@@ -24,7 +24,7 @@ channel: dev
 path: ~/stepper-brake
 origin: https://github.com/LynxCrew/Stepper-Brake.git
 managed_services: klipper
-primary_branch: main
+primary_branch: psu_enable
 install_script: install.sh
 ```
 
