@@ -1,9 +1,10 @@
 class StepperBrakeEnablePin:
-    def __init__(self, enable, mcu_pin, toolhead, wait_time):
+    def __init__(self, enable, stepper_brake):
         self.enable = enable
-        self.mcu_pin = mcu_pin
-        self.toolhead = toolhead
-        self.wait_time = wait_time
+        self.stepper_brake = stepper_brake
+        self.mcu_pin = stepper_brake.mcu_pin
+        self.toolhead = stepper_brake.toolhead
+        self.wait_time = stepper_brake.wait_time
         self.mcu_enable = self.enable.mcu_enable
         self.enable.mcu_enable = self
 
@@ -36,8 +37,7 @@ class StepperBrake:
         for stepper_name in self.stepper_names:
             StepperBrakeEnablePin(
                 self.stepper_enable.lookup_enable(stepper_name).enable,
-                self.mcu_pin,
-                self.toolhead,
+                self,
             )
 
 
